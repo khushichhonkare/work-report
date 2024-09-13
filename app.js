@@ -3,7 +3,6 @@ import { exec } from 'child_process';
 
 const app = express();
 
-// Function to execute a shell command using promises
 const runGitCommand = (command) => 
   new Promise((resolve, reject) => {
     exec(command, (error, stdout, stderr) => {
@@ -19,14 +18,13 @@ const runGitCommand = (command) =>
     });
   });
 
-// Async function to run the Git command and process the output
+
 (async () => {
   try {
     const result = await runGitCommand(
       'git --no-pager log'
     );
 
-    // Improved regex to capture commit message after the commit type
     const regex = /\b(?:refactor|merge|feat|fix): ([^\n]+)/gi;
     
     // Use matchAll to get all matches at once
